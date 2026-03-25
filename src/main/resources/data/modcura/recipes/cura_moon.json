@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "CAC",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "item": "modcura:cristal_lua"
+    },
+    "A": {
+      "item": "golden_apple"
+    }
+  },
+  "result": {
+    "item": "modcura:cura_moon",
+    "count": 1
+  }
+}
