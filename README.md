@@ -17,8 +17,7 @@ Este projeto une minha paixão por desenvolvimento de sistemas com o design de e
 
 ### 🐺 Fauna Lunar
 Novas criaturas que aparecem apenas sob condições específicas do luar, incluindo:
-* **[Nome do Animal 1]:** Descrição rápida do comportamento.
-* **[Nome do Animal 2]:** Descrição rápida do comportamento.
+* **Paladino da lua:** Forte e veroz, este guardião lunar protege os segredos da noite.
 
 ### 🌌 Estética & Atmosfera
 * Paleta de cores frias e iluminação dinâmica para maior imersão.
@@ -32,8 +31,8 @@ Novas criaturas que aparecem apenas sob condições específicas do luar, inclui
 ## 🛠️ Especificações Técnicas
 Como um projeto de engenharia, a estrutura segue padrões de organização para facilitar a manutenção:
 
-* **Engine:** [Forge / Fabric]
-* **Versão do Minecraft:** [Ex: 1.20.1]
+* **Engine:** Forge 
+* **Versão do Minecraft:** 1.18.2
 * **Linguagem:** Java
 * **Asset Tooling:** Blockbench (Modelagem) e Aseprite (Texturas)
 
