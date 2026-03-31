@@ -103,10 +103,13 @@ public class PaladinMob extends Monster {
     protected void dropCustomDeathLoot(net.minecraft.world.damagesource.DamageSource source, int looting, boolean recentlyHit) {
         super.dropCustomDeathLoot(source, looting, recentlyHit);
 
-        // Chance de 50% de dropar 1 Cristal da Lua (aumenta com looting)
-        if (this.random.nextFloat() < 5.0F + (looting * 0.9F)) {
+        // 🌙 Dropa 5 Cristais da Lua quando morre
+        for (int i = 0; i < 5; i++) {
             this.spawnAtLocation(new ItemStack(ModItems.CRISTAL_LUA.get()));
         }
+        
+        // Decrementa contador de paladinos vivos
+        com.moon.modcura.PaladinNightSpawner.onPaladinDeath();
     }
 
     // Spawn controlado pelo SpawnPaladinHandler que detecta marcadores de nave

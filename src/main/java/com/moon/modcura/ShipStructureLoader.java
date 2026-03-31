@@ -26,7 +26,7 @@ public class ShipStructureLoader {
     
     // 🚀 COORDENADAS DA NAVE - MUDE AQUI PARA MUDAR A POSIÇÃO
     public static final int SHIP_X = 100;
-    public static final int SHIP_Y = 64;
+    public static final int SHIP_Y = 50;  // 🔥 Nave caída no chão
     public static final int SHIP_Z = 200;
     
     // Raio ao redor da nave onde paladinos podem spawnar

@@ -20,6 +20,7 @@ public class PaladinNightSpawner {
 
     private static final Random RANDOM = new Random();
     private static int tickCounter = 0;
+    private static int paladinCount = 0;  // 🌙 Contador de paladinos ativos
 
     @SubscribeEvent
     public static void onServerTick(TickEvent.ServerTickEvent event) {
@@ -53,13 +54,16 @@ public class PaladinNightSpawner {
         boolean isNight = dayTime >= 13000 && dayTime < 23000;
 
         if (!isNight) {
+            paladinCount = 0;  // Reset durante o dia
             return;
         }
 
-        // Spawna paladinos apenas perto da nave
-        // 40% de chance de spawnar um Paladino a cada ciclo
-        if (RANDOM.nextFloat() < 0.4F) {
-            spawnPaladinNearShip(level);
+        // 🌙 Máximo 3 paladinos por vez
+        if (paladinCount < 3) {
+            if (RANDOM.nextFloat() < 0.5F) {
+                spawnPaladinNearShip(level);
+                paladinCount++;
+            }
         }
     }
 
@@ -93,6 +97,15 @@ public class PaladinNightSpawner {
             System.out.println("[ModCura] 🌙 Paladino spawnado perto da nave em: " + spawnX + ", " + (spawnY + 1) + ", " + spawnZ);
         } catch (Exception e) {
             System.err.println("[ModCura] Erro ao criar Paladino: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Chamado quando um paladino morre - decrementa o contador
+     */
+    public static void onPaladinDeath() {
+        if (paladinCount > 0) {
+            paladinCount--;
         }
     }
 }
