@@ -109,12 +109,9 @@ public class PaladinMob extends Monster {
         }
     }
 
-    // Só spawna à noite
+    // Spawn controlado pelo SpawnPaladinHandler que detecta marcadores de nave
     @Override
     public boolean checkSpawnRules(LevelAccessor level, MobSpawnType spawnType) {
-        if (level instanceof Level lvl) {
-            return super.checkSpawnRules(level, spawnType) && !lvl.isDay();
-        }
         return super.checkSpawnRules(level, spawnType);
     }
 }
