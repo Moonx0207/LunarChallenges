@@ -25,9 +25,10 @@ public class ModCura {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
 
-        // Registra Entidades e Itens
+        // Registra Entidades, Itens e Efeitos
         ModEntities.ENTITIES.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
+        ModEffects.MOB_EFFECTS.register(modEventBus);
 
         modEventBus.addListener(this::entityAttributeCreation);
         modEventBus.addListener(this::clientSetup);
@@ -50,3 +51,6 @@ public class ModCura {
         EntityRenderers.register(ModEntities.PALADIN_MOB.get(), PaladinMobRenderer::new);
     }
 }
+
+
+

@@ -1,62 +1,33 @@
-# 🌙 LunarChallenges: A Moonlight Adventure
-> Um mod de Minecraft focado em estética mística, fauna lunar e exploração imersiva.
+# ModCura (Minecraft Forge 1.18.2)
 
----
+Mod focado em mecânicas noturnas e tema lunar.
 
-## 📖 Sobre o Projeto
-O **LunarChallenges** não é apenas um mod de conteúdo, mas uma redefinição da experiência noturna no Minecraft. Criado com uma estética **Luna-Centric**, o mod introduz uma atmosfera serena, porém perigosa, onde o luar dita o ritmo da aventura.
+## Funcionalidades
 
-Este projeto une minha paixão por desenvolvimento de sistemas com o design de experiências imersivas, focando em:
-* **Visual Storytelling:** Biomas que reagem à fase da lua.
-* **Custom Entities:** Novos animais com modelos e texturas personalizadas.
-* **Adventure Mechanics:** Desafios de exploração que recompensam a curiosidade.
+### Maldição Noturna
+Durante a noite (tempo do mundo entre `12000` e `23999`), o jogador recebe o efeito **Maldição Noturna**.
 
----
+* Causa **1 coração** de dano a cada ~4 segundos.
+* O ícone do efeito fica em: `assets/modcura/textures/mob_effect/night_curse.png`.
 
-## ✨ Funcionalidades Principais
+### Cura da Lua
+O item **Cura da Lua** remove a Maldição Noturna ao ser usado.
 
-### 🐺 Fauna Lunar
-Novas criaturas que aparecem apenas sob condições específicas do luar, incluindo:
-* **Paladino da lua:** Forte e veroz, este guardião lunar protege os segredos da noite.
+### Paladino da Lua / Nave
+Inclui entidade(s) e lógica relacionada ao Paladino da Lua e à nave/estrutura do mod.
 
-### 🌌 Estética & Atmosfera
-* Paleta de cores frias e iluminação dinâmica para maior imersão.
-* Partículas customizadas para simular poeira lunar em biomas específicos.
+## Dev / Build
 
-### ⚔️ O Desafio (The Challenge)
-* Missões integradas que guiam o jogador através das novas mecânicas de aventura.
+### Requisitos
+* Java (compatível com o projeto)
+* Gradle Wrapper (já incluso)
 
----
+### Comandos
 
-## 🛠️ Especificações Técnicas
-Como um projeto de engenharia, a estrutura segue padrões de organização para facilitar a manutenção:
+```powershell
+cd E:\Documentos\mod_cura_moon
+./gradlew build
+```
 
-* **Engine:** Forge 
-* **Versão do Minecraft:** 1.18.2
-* **Linguagem:** Java
-* **Asset Tooling:** Blockbench (Modelagem) e Aseprite (Texturas)
-
----
-
-## 🚀 Como Instalar (Para Jogadores)
-1. Certifique-se de ter o **[Forge/Fabric]** instalado.
-2. Baixe o `.jar` na aba [Releases](link-da-release).
-3. Coloque o arquivo na sua pasta `%appdata%/.minecraft/mods`.
-4. Inicie o jogo e busque pelo horizonte prateado!
-
----
-
-## 👨‍💻 Contribuição (Para Desenvolvedores)
-Se você deseja estudar o código ou contribuir:
-1. Faça um `fork` do projeto.
-2. Crie uma branch para sua feature (`git checkout -b feature/NovaCriatura`).
-3. Comite suas mudanças (`git commit -m 'Add: Novo comportamento de IA'`).
-4. Dê um `push` e abra um `Pull Request`.
-
----
-girt
-## 📜 Licença
-Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
-
----
-Portfólio de **Ryan Lima** | Conecte-se comigo no [LinkedIn](seu-link-aqui)
+## Licença
+MIT (veja `LICENSE`).

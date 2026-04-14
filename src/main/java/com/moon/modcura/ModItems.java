@@ -36,7 +36,6 @@ public class ModItems {
                             .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 1200, 3), 1.0f)  // 1200 ticks = 60s, amplifier 3 = nível 4
                             .effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 3600, 5), 1.0f)  // 3600 ticks = 3 min, amplifier 5 = nível 6
                             .effect(() -> new MobEffectInstance(MobEffects.HEALTH_BOOST, 3600, 4), 1.0f)  // Amplifier 2 = nível 3, +12 corações max
-
                             .build())
             ));
 
@@ -50,6 +49,14 @@ public class ModItems {
                 public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
                     ItemStack itemstack = player.getItemInHand(hand);
                     if (!level.isClientSide) {
+                        // Remove a Maldição Noturna se o jogador tiver
+                        if (player.hasEffect(ModEffects.NIGHT_CURSE.get())) {
+                            player.removeEffect(ModEffects.NIGHT_CURSE.get());
+                        }
+
+                        // Aplica efeitos de cura
+                        player.addEffect(new MobEffectInstance(MobEffects.HEAL, 1, 2));  // Cura imediata nível 3
+                        player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 300, 2));  // Regeneração por 15 segundos nível 3
                         player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 600, 0));  // 30 segundos (600 ticks)
                         player.playSound(net.minecraft.sounds.SoundEvents.EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F);
                         if (!player.getAbilities().instabuild) {

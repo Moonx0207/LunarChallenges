@@ -2,5 +2,8 @@
   "item.modcura.cura_moon": "Cura da Lua",
   "item.modcura.cristal_lua": "Cristal da Lua",
   "item.modcura.moon_paladin": "Paladino da Lua",
-  "item.modcura.sabre_lunar": "Sabre Lunar"
+  "item.modcura.sabre_lunar": "Sabre Lunar",
+  "effect.modcura.night_curse": "Maldição da Noite",
+  "effect.modcura.night_curse.description": "Causa dano durante a noite. Use a Cura da Lua para removê-la."
+
 }

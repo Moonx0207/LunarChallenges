@@ -2,5 +2,7 @@
   "item.modcura.cura_moon": "Cure of Moon",
   "item.modcura.cristal_lua": "Cristal of cure",
   "item.modcura.moon_paladin": "Moon Paladin",
-  "item.modcura.sabre_lunar": "Lunar Saber"
+  "item.modcura.sabre_lunar": "Lunar Saber",
+  "effect.modcura.night_curse": "Night's Curse",
+  "effect.modcura.night_curse.description": "Causes damage during nighttime. Use Moon Cure to remove it."
 }
