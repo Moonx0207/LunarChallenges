@@ -1,6 +1,5 @@
 package com.moon.modcura.entity;
 
-import com.moon.modcura.ModCura;
 import com.moon.modcura.ModItems;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -17,7 +16,6 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 
@@ -61,8 +59,8 @@ public class PaladinMob extends Monster {
             livingTarget.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 200, 0), this);
 
             // Física: Knockback + Impulso para o alto
-            double d0 = -Math.sin(this.getYRot() * (float)Math.PI / 180.0F);
-            double d1 = Math.cos(this.getYRot() * (float)Math.PI / 180.0F);
+            double d0 = -Math.sin(this.getYRot() * (float) Math.PI / 180.0F);
+            double d1 = Math.cos(this.getYRot() * (float) Math.PI / 180.0F);
             livingTarget.knockback(3.0D, d0, d1);
             livingTarget.setDeltaMovement(livingTarget.getDeltaMovement().add(0, 0.5D, 0));
             livingTarget.hasImpulse = true;
@@ -86,6 +84,7 @@ public class PaladinMob extends Monster {
 
         return hasHit;
     }
+
     // Som de morte
     @Override
     protected net.minecraft.sounds.SoundEvent getDeathSound() {
@@ -107,7 +106,7 @@ public class PaladinMob extends Monster {
         for (int i = 0; i < 5; i++) {
             this.spawnAtLocation(new ItemStack(ModItems.CRISTAL_LUA.get()));
         }
-        
+
         // Decrementa contador de paladinos vivos
         com.moon.modcura.PaladinNightSpawner.onPaladinDeath();
     }
@@ -115,6 +114,7 @@ public class PaladinMob extends Monster {
     // Spawn controlado pelo SpawnPaladinHandler que detecta marcadores de nave
     @Override
     public boolean checkSpawnRules(LevelAccessor level, MobSpawnType spawnType) {
-        return super.checkSpawnRules(level, spawnType);
+        return true;
     }
-}
+
+} 

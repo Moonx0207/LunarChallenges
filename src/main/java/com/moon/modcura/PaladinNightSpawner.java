@@ -4,7 +4,6 @@ import com.moon.modcura.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -68,17 +67,15 @@ public class PaladinNightSpawner {
     }
 
     private static void spawnPaladinNearShip(Level level) {
-        // Gera coordenadas aleatórias perto da nave (raio configurável)
-        int distance = 15 + RANDOM.nextInt(25); // 15-40 blocos da nave
+        // Gera coordenadas aleatórias EN CIMA da nave (raio configurável)
+        int distance = 5 + RANDOM.nextInt(25); // 5-30 blocos de raio em cima da nave
         double angle = Math.random() * Math.PI * 2;
 
         int spawnX = ShipStructureLoader.SHIP_X + (int) (Math.cos(angle) * distance);
         int spawnZ = ShipStructureLoader.SHIP_Z + (int) (Math.sin(angle) * distance);
+        int spawnY = ShipStructureLoader.SHIP_SPAWN_HEIGHT;  // Altura fixa: 5 blocos acima da nave
 
-        // Encontra altura válida
-        int spawnY = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, spawnX, spawnZ);
-
-        BlockPos spawnPos = new BlockPos(spawnX, spawnY + 1, spawnZ);
+        BlockPos spawnPos = new BlockPos(spawnX, spawnY, spawnZ);
 
         // Valida se está dentro do mundo
         if (!level.isInWorldBounds(spawnPos)) {
@@ -91,10 +88,10 @@ public class PaladinNightSpawner {
                 level
             );
 
-            paladin.setPos(spawnX, spawnY + 1, spawnZ);
+            paladin.setPos(spawnX, spawnY, spawnZ);
             level.addFreshEntity(paladin);
 
-            System.out.println("[ModCura] 🌙 Paladino spawnado perto da nave em: " + spawnX + ", " + (spawnY + 1) + ", " + spawnZ);
+            System.out.println("[ModCura] 🌙 Paladino spawnado EN CIMA da nave em: " + spawnX + ", " + spawnY + ", " + spawnZ);
         } catch (Exception e) {
             System.err.println("[ModCura] Erro ao criar Paladino: " + e.getMessage());
         }

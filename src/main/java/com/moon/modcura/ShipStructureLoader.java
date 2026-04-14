@@ -17,7 +17,7 @@ import net.minecraftforge.server.ServerLifecycleHooks;
 import java.io.InputStream;
 
 /**
- * Carrega a nave .nbt no mundo no primeiro tick
+ * Carrega a nave .schematic no mundo no primeiro tick
  */
 @Mod.EventBusSubscriber(modid = ModCura.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ShipStructureLoader {
@@ -25,13 +25,14 @@ public class ShipStructureLoader {
     private static boolean shipLoaded = false;
     
     // 🚀 COORDENADAS DA NAVE - MUDE AQUI PARA MUDAR A POSIÇÃO
-    public static final int SHIP_X = 100;
-    public static final int SHIP_Y = 50;  // 🔥 Nave caída no chão
-    public static final int SHIP_Z = 200;
-    
-    // Raio ao redor da nave onde paladinos podem spawnar
-    public static final int SHIP_SPAWN_RADIUS = 40;
-    
+    public static final int SHIP_X = 600;
+    public static final int SHIP_Y = 150;  // 🚀 Nave bem alto no céu
+    public static final int SHIP_Z = 780;
+
+    // Raio ao redor da nave onde paladinos podem spawnar (em cima da nave)
+    public static final int SHIP_SPAWN_RADIUS = 30;
+    public static final int SHIP_SPAWN_HEIGHT = SHIP_Y + 5;  // 5 blocos acima da nave
+
     @SubscribeEvent
     public static void onServerTick(TickEvent.ServerTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
@@ -58,31 +59,56 @@ public class ShipStructureLoader {
      * Carrega a estrutura .nbt no mundo
      */
     public static void loadShipStructure(ServerLevelAccessor level) throws Exception {
-        // Tenta carregar o arquivo .nbt
-        InputStream stream = ShipStructureLoader.class.getResourceAsStream(
-            "/data/modcura/structures/nave_paladin.nbt"
-        );
+        try {
+            // Tenta carregar o arquivo .nbt
+            InputStream stream = ShipStructureLoader.class.getResourceAsStream(
+                "/data/modcura/structures/nave_paladin.nbt"
+            );
+            
+            if (stream == null) {
+                System.out.println("[ModCura] ⚠️ Arquivo 'nave_paladin.nbt' não encontrado - usando nave padrão");
+                createDefaultShip(level);
+                return;
+            }
+            
+            // Lê o arquivo NBT
+            CompoundTag tag = NbtIo.readCompressed(stream);
+            stream.close();
+            
+            // Cria template e coloca no mundo
+            StructureTemplate template = new StructureTemplate();
+            template.load(tag);
+            
+            BlockPos pos = new BlockPos(SHIP_X, SHIP_Y, SHIP_Z);
+            StructurePlaceSettings settings = new StructurePlaceSettings();
+            settings.setMirror(Mirror.NONE);
+            settings.setRotation(Rotation.NONE);
+            
+            template.placeInWorld(level, pos, pos, settings, new java.util.Random(), 1);
+            System.out.println("[ModCura] ✅ Nave .nbt carregada com sucesso!");
+
+        } catch (Exception e) {
+            System.out.println("[ModCura] ⚠️ Erro ao carregar nave .nbt - usando nave padrão");
+            System.out.println("[ModCura] ℹ️ Motivo: " + e.getMessage());
+            createDefaultShip(level);
+        }
+    }
+    
+    /**
+     * Cria uma nave padrão simples se o arquivo schematic for inválido
+     */
+    private static void createDefaultShip(ServerLevelAccessor level) {
+        BlockPos pos = new BlockPos(SHIP_X, SHIP_Y, SHIP_Z);
         
-        if (stream == null) {
-            throw new RuntimeException("❌ Arquivo 'nave.nbt' não encontrado em /data/modcura/structures/");
+        // Cria uma estrutura simples de teste (plataforma 10x10)
+        for (int x = -5; x <= 5; x++) {
+            for (int z = -5; z <= 5; z++) {
+                BlockPos blockPos = pos.offset(x, 0, z);
+                level.setBlock(blockPos, net.minecraft.world.level.block.Blocks.DARK_OAK_PLANKS.defaultBlockState(), 3);
+            }
         }
         
-        // Lê o arquivo NBT
-        CompoundTag tag = NbtIo.readCompressed(stream);
-        stream.close();
-        
-        // Cria template
-        StructureTemplate template = new StructureTemplate();
-        template.load(tag);
-        
-        // Coloca a estrutura no mundo
-        BlockPos pos = new BlockPos(SHIP_X, SHIP_Y, SHIP_Z);
-        StructurePlaceSettings settings = new StructurePlaceSettings();
-        settings.setMirror(Mirror.NONE);
-        settings.setRotation(Rotation.NONE);
-        
-        // Usa o método correto para MC 1.18.2
-        template.placeInWorld(level, pos, pos, settings, new java.util.Random(), 1);
+        System.out.println("[ModCura] ✅ Nave padrão criada em: " + SHIP_X + ", " + SHIP_Y + ", " + SHIP_Z);
     }
     
     /**
