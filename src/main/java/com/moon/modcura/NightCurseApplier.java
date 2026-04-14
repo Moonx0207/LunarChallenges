@@ -12,7 +12,8 @@ import net.minecraftforge.server.ServerLifecycleHooks;
  */
 @Mod.EventBusSubscriber(modid = ModCura.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class NightCurseApplier {
-    
+
+
     private static int tickCounter = 0;
     private static final int CHECK_INTERVAL = 20; // Verifica a cada 1 segundo (20 ticks)
     
